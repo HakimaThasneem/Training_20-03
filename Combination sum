@@ -1,0 +1,23 @@
+public class Main {
+    public static void main(String[] args) {
+        int arr[] = {2, 3, 6, 7};
+        int target = 7;
+        int[] combination = new int[arr.length];
+        findCombinations(arr, target, 0, combination, 0);
+    }
+    private static void findCombinations(int[] arr, int target, int index, int[] combination, int size) {
+        if (target == 0) {
+            for (int i = 0; i < size; i++) {
+                System.out.print(combination[i] + " ");
+            }
+            System.out.println();
+            return;
+        }
+        for (int i = index; i < arr.length; i++) {
+            if (arr[i] <= target) {
+                combination[size] = arr[i];
+                findCombinations(arr, target - arr[i], i, combination, size + 1);
+            }
+        }
+    }
+}
