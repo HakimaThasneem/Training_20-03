@@ -1,0 +1,35 @@
+
+       import java.util.Scanner;
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the number of elements in the sorted array: ");
+        int n = scanner.nextInt();
+        int[] nums = new int[n];
+        System.out.println("Enter the sorted array elements:");
+        for (int i = 0; i < n; i++) {
+            nums[i] = scanner.nextInt();
+        }
+        System.out.print("Enter the target value: ");
+        int target = scanner.nextInt();
+        int index = searchInsert(nums, target);
+        System.out.println("Target should be at index: " + index);
+    }
+    public static int searchInsert(int[] nums, int target) {
+        int low = 0, high = nums.length - 1;
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2; 
+
+            if (nums[mid] == target) {
+                return mid; 
+            } else if (nums[mid] < target) {
+                low = mid + 1; 
+            } else {
+                high = mid - 1;
+            }
+        }
+
+        return low; 
+    }
+}
