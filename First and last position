@@ -1,0 +1,51 @@
+import java.util.Scanner;
+class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the number of elements in the sorted array: ");
+        int n = scanner.nextInt();
+        int[] nums = new int[n];
+        System.out.println("Enter the sorted array elements:");
+        for (int i = 0; i < n; i++) {
+            nums[i] = scanner.nextInt();
+        }
+        System.out.print("Enter the target value: ");
+        int target = scanner.nextInt();
+        int[] result = searchRange(nums, target);
+        System.out.println("Target range: [" + result[0] + ", " + result[1] + "]");
+    }
+    public static int[] searchRange(int[] nums, int target) {
+        int[] result = {-1, -1};
+        
+        result[0] = findFirst(nums, target);
+        if (result[0] != -1) {
+            result[1] = findLast(nums, target);
+        }
+
+        return result;
+    }
+    private static int findFirst(int[] nums, int target) {
+        int low = 0, high = nums.length - 1;
+        while (low < high) {
+            int mid = low + (high - low) / 2;
+            if (nums[mid] >= target) {
+                high = mid;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return (low < nums.length && nums[low] == target) ? low : -1;
+    }
+    private static int findLast(int[] nums, int target) {
+        int low = 0, high = nums.length - 1;
+        while (low < high) {
+            int mid = low + (high - low) / 2 + 1; 
+            if (nums[mid] <= target) {
+                low = mid;
+            } else {
+                high = mid - 1;
+            }
+        }
+        return (low < nums.length && nums[low] == target) ? low : -1;
+    }
+}
